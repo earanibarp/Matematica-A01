@@ -1,14 +1,8 @@
 extends Area2D
 
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	position = Vector2(100,50)
+	OS.center_window()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -30,3 +24,21 @@ func _process(delta):
 		position.y = 720
 	if position.y < 0:
 		position.y = 0
+		
+	if Input.is_action_pressed("ui_left") == true:
+		$AnimatedSprite.flip_h = true
+		$AnimatedSprite.play("run")
+	elif Input.is_action_pressed("ui_right") == true:
+		$AnimatedSprite.flip_h = false
+		$AnimatedSprite.play("run")
+	elif Input.is_action_pressed("ui_up") == true:
+		$AnimatedSprite.play("run")
+	elif Input.is_action_pressed("ui_down") == true:
+		$AnimatedSprite.play("run")
+	else:
+		$AnimatedSprite.play("idle")
+
+
+func _on_Player_area_entered(area):
+	if area.is_in_group("gem"):
+		area.pickup()
