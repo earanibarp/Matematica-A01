@@ -1,5 +1,7 @@
 extends Area2D
 
+signal picked
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	OS.center_window()
@@ -42,3 +44,10 @@ func _process(delta):
 func _on_Player_area_entered(area):
 	if area.is_in_group("gem"):
 		area.pickup()
+		emit_signal("picked")
+		$AudioStreamPlayer.play()
+
+
+func game_over():
+	set_process(false)
+	$AnimatedSprite.play("hurt")
