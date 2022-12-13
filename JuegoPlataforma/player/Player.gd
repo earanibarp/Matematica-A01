@@ -13,7 +13,7 @@ var new_animation
 
 
 var jump = -300
-var gravity = 700
+var gravity = 500
 
 func _ready():
 	OS.center_window()
